@@ -15,11 +15,8 @@ namespace BlazorApp.Client
             builder.RootComponents.Add<App>("app");
 
             var baseAddress = builder.Configuration["BaseAddress"] ?? builder.HostEnvironment.BaseAddress;
-            builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(baseAddress) });
-
-            builder.Services
-                .AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
-                .AddStaticWebAppsAuthentication();
+            builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(baseAddress) })
+            .AddStaticWebAppsAuthentication();
 
             await builder.Build().RunAsync();
         }
